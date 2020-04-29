@@ -1,26 +1,26 @@
-import React from 'react';
+import React, {useState} from 'react';
 import logo from './logo.svg';
 import './App.css';
+import {Hello, Button, Display} from './jscomplete-playground.js';
 
 function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+    //const [currentStateValue, functionToSetNewStateValue] = useState(initialStateValue);
+    const [counter, setCounter] = useState(0)
+    //the argument of setCounter will become the new value of counter here
+    const incrementCounter = (incrementValue) => setCounter(counter+incrementValue);
+    return (
+        <div className="App">
+            <header className="App-header">
+                <Hello/>
+                {/*The value of the tag here becomes the */}
+                <Button onClickFunction = {incrementCounter} increment = {1}/>
+                <Button onClickFunction = {incrementCounter} increment = {5}/>
+                <Button onClickFunction = {incrementCounter} increment = {13}/>
+                <Display message ={counter} />
+            </header>
+
+        </div>
+    );
 }
 
 export default App;
