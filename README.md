@@ -90,17 +90,16 @@ The state input is internal. React uses it to auto-reflect changes in the browse
 Functional Components are prefered because they are simpler.
 
 **Class Components**  
-Though class components are a bit more complex they can also be more powerful.
+Though class components are a bit more complex they can also be more powerful.  
+  
 
-# Hooks
+# React Functional Components  
+Important to know for React functional components: State, props and hooks.  
+
+## Hooks
 The useState function in react is a type of hook. 
 
-## State
-State in a React component can only be accesed by that component itself and no other components. To make state accessable between components, you need to put the state inside of a parent component that the other required components are children to. You then need to 'flow' the values of the state from the parent to the children - this can be done using the props object. This is known as 'the one way flow of data' (parent to child). Parent components can also flow behaviour down to children.  
-
-Where to place state is an important question to think about for the design of your app. It is best to place state as far down a tree as possible - as close as possible to the children who will need it.
-
-### Props object
+## Props object
 Props can be used to pass any object value from one component to others. Props can hold functions(which are seen as an object in JS) or data and they can be used to pass functions/data between components. 
 Props are majorly linked to the concept of "responsibility isolation" and separation of responsibilites.
 
@@ -132,6 +131,12 @@ function Display(props) {
 }
 ```
 
+
+## State object
+State in a React component can only be accesed by that component itself and no other components. To make state accessable between components, you need to put the state inside of a parent component that the other required components are children to. You then need to 'flow' the values of the state from the parent to the children - this can be done using the props object. This is known as 'the one way flow of data' (parent to child). Parent components can also flow behaviour down to children.  
+
+Where to place state is an important question to think about for the design of your app. It is best to place state as far down a tree as possible - as close as possible to the children who will need it.
+
 ### useState()
 useState() is similar to a mixin or a module but it is a stateful one that hooks components into states. This must be imported with `import React, {useState} from 'react';` inside of any component that uses it.
 `const [currentStateValue, functionToSetNewStateValue] = useState(initialStateValue); `
@@ -142,7 +147,38 @@ useState() can return two objects:
 Because all functions in JS can only return one thing, the useState function returns an array with the two elements needed.
 
 
+# Class Components  
 
+In class components, instead of recieving props as arguments, both the props and the state are managed on an instance of the class. (This is just like normal OOP, you make a class and then have to instantiate it - each instance(object) of a class gets 'props and state').
+
+
+
+# Styling in React
+
+You can style your react elements with a css sheet as normal or you can style with a style property inside of the jsx tag.
+As there are pros and cons (see below) to both ways of styling, some people like to use both JS styles and Global styles.
+Styling with CSS/Global styling  
+
+**Styling with style properties**  
+you can add style to your elements using the style property. Unline "inline HTML styling" this is acceptable and not as frowned uppon (although there is still debate around this!). 
+The points against it:  
+- it feels like inline styling 
+- it would be super difficult to do media queries with JS styling 
+The points for it:  
+- excelent for conditional styling (instead of having to use different class names based on a certain condition, with JS styles, you can just output different objects which some might consider a bit cleaner)
+- it is JS, not strings, therefore 
+	- we can generate it and reuse it using the complete power of JS. 
+	- We can use conditional styles in this way without having to deal with conditional classNames 
+	- you can put logic directly into the style code eg `<div style={{ color: Math.random() < 0.5 ? 'green': 'red' }}>`
+You pass this special React property a JS object (just like with events).
+You use curly braces for a dynamic value and then the inner curley braces are to start an object literal.  
+Inside the style object you can specify any styles you want the element to have using the JS API for styles. 
+The syntax for this is not the same as regular CSS styling as it is entirely JS. It uses camel case for property names and strings for values.
+Example:
+` <div className="info" style={{display: 'inline-block', marginLeft: 10}}> `  
+
+Learn more about styling in JS here: github.com/MicheleBertoli/css-in-js (some are depreciated so be careful).
+A good starting point is the: bable-plugin-css-in-js and react-native-web.
 
 
 # Extras
@@ -158,7 +194,7 @@ Const is NOT an immutable object - you can change it. Const just means that it h
 Scaler Values: scaler variables (such as strings or integers) ARE immutable and their value cannot be mutated. When you use const with a scaler value you cannot change their references either. HOWEVER, if you used cosnt with an array or object, that does not mean that the content of this array or object cannot change. It just means that the reference will constantly be pointing to this particular array or object.  
 Variables defined with const are much better than let for scaler values and function as you are guaranteed that their value did not accidentally change.
 
-## JS Notes
+# General JS Notes
 ### Object Literals
 The most common way to create a JS object is using an object lieral. This is basically where you just say `const obj = { key:value};` 
 
