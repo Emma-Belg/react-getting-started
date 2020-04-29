@@ -45,14 +45,22 @@ Using jsx to create to HTML. When your web app receives just the data from the s
 
 React uses option two and therefore eleminates the need to parse an enhanced HTML template. An advantage of this is the virtual DOM (aka Tree Reconcilliation algorithm).   
 
-**Virtual DOM**
+### Virtual DOM
 React uses the Virtual DOM to compare versions of the UI in memory before it acts on them.  
+React uses a "smart diffing" algorithm in order to update the virtual DOM.
+
+**My simple metaphor for the Virtual DOM (VD)...**  
+Remember those 'spot the difference' pictures from when you were a kid? Think of the UI as one of these pictures and as a change in state as one of the 'differences' that needs to be spotted.
+**In the pure HTML way**: every change in state means that the entire picture needs to be "drawn" again from scratch.
+**In the React Virtual DOM way**: the VD can quickly "spot the difference" between the previous state and the updated state and instead of drawing the entire picture again from scratch, it will _only update the elements that are needed_. This is possible because we have a representation of the UI in memory because it was written in JS - the VD compares previous state to current state and updates what is needed.
+
+_**Why should I care?**_
+Imagine you have a website with a counter that counts down (in seconds) until something is put on sale and it also has an input field where you can pre-order. With the pure HTML way, you will never be able to use this input field because the second you type something into it - it will be entirely refreshed as the entrie page needs to rerender for the counter to continue (there are ways around this with imperative coding). Whereas this would never be a problem with a React App thanks to the VD.
 
 **JSX**
-JSX is complied to the pure JS calls that create the HTML output. JSX is not executed by the browser, it is executed by the JSX extension and compiled to something the browser can understand.  
+JSX is complied to the pure JS calls that create the HTML output. JSX (like twig) supports dynamic expressions (functions placed into {}). JSX is not executed by the browser, it is executed by the JSX extension and compiled to something the browser can understand.  
 Bable is a compiler that can convert JSX into react API calls.
-An Exapmple
-
+An Exapmple:
 
 | React API Calls  | JSX          |
 | ------------- |:-------------:|
@@ -82,9 +90,71 @@ Functional Components are prefered because they are simpler.
 **Class Components**  
 Though class components are a bit more complex they can also be more powerful.
 
+# Hooks
+The useState function in react is a type of hook. 
+
+## State
+State in a React component can only be accesed by that component itself and no other components. To make state accessable between components, you need to put the state inside of a parent component that the other required components are children to. You then need to 'flow' the values of the state from the parent to the children - this can be done using the props object. This is known as 'the one way flow of data' (parent to child). Parent components can also flow behaviour down to children.  
+
+Where to place state is an important question to think about for the design of your app. It is best to place state as far down a tree as possible - as close as possible to the children who will need it.
+
+### Props object
+Props can be used to pass any object value from one component to others. Props can hold functions(which are seen as an object in JS) or data and they can be used to pass functions/data between components. 
+Props are majorly linked to the concept of "responsibility isolation" and separation of responsibilites.
+
+Where you are rendering it:  
+To pass a prop to a component you specify an attribute inside of the component tag (similar to what you would do with a HTML tag) where you are rendering it (inside the App component for example).  
+
+In the function componenet:  
+You then put 'props' (it doesn't have to be called 'props' but that is the convention) inside of the argument to the component function. ALL function components receive this object, _even when they have no attributes_.
+
+Because a component can receive many attributes, the props object will have a key/value pair for each attribute.  
+Example:  
+In the Display Component:  
+```
+function App() {
+	return (
+    <div>
+      <Display message={counter}/>
+    </div>  
+  );
+}
+```
+
+In the Function Component:  
+```
+function Display(props) {
+	return (
+  	<div>{props.message}</div>
+  );
+}
+```
+
 ### useState()
-This must be imported with `import React, {useState} from 'react';` inside of any component that uses it.
+useState() is similar to a mixin or a module but it is a stateful one that hooks components into states. This must be imported with `import React, {useState} from 'react';` inside of any component that uses it.
+`const [currentStateValue, functionToSetNewStateValue] = useState(initialStateValue); `
 useState() can return two objects:
 - state object (getter): this can be of any type you want it to be (string, int, array etc)
 - update function (setter)  
 
+Because all functions in JS can only return one thing, the useState function returns an array with the two elements needed.
+
+
+# Tree Reconciliation 
+#### Array Destructuring
+
+#### Arrow Functions
+
+
+# Extras
+
+Note: if you need to enclose multiple elements without introducing a new div parent, you can use `<React.Fragment>` or `<>` (if latter is supported in the environment it will get compiled to the former). It is similar to putting React elements into a <div> but no new DOM parent will be introduced. 
+  
+**JavaScript Closures**
+**React uses function references** so it is important when you are passing functions to other components (in exports and imports) that you do not invoke the function - so only use the function name and not the name plus brackets eg Function(). This also means that if you want to pass certain parameters to a function inside of a component, that you cannot do this. The only way to do this without inducing an error is by wrapping the 'invocation' of the function inside an arrow function.
+eg. you cannot do this: `<button onClick={props.onClickFunction(props.increment)}>` but you can do this `<button onClick={() => props.onClickFunction(props.increment)}>`. The latter will work through the magic of JavaScript closers.  
+
+  
+## To Look Into
+- JS closures -> why a function needs to be wrapped with an arrow function in order to work
+- imperativ vs declarative programing (React is declarative and uses the virtual DOM, in order to get pure HTML to update only one element in a similar way, you need to write imperative logic),
