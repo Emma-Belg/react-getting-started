@@ -2,6 +2,10 @@
 
 I am following the "React: Getting Started" course by Samer Buna on Pluralsight.
 
+Instal the React Developer Tools extension.
+
+jsdrops.com/rgs1.1
+
 ##  Why use React?
 jscomplete.com/why-react
 React is technically a library (although it acts like a framewor) for building user interfaces. React is small and therefore needs to rely on other libraries for a full and robust solution.  
@@ -43,7 +47,19 @@ React uses option two and therefore eleminates the need to parse an enhanced HTM
 React uses the Virtual DOM to compare versions of the UI in memory before it acts on them.
 
 **JSX**
-JSX is complied to the pure JS calls that create the HTML output.
+JSX is complied to the pure JS calls that create the HTML output. JSX is not executed by the browser, it is executed by the JSX extension and compiled to something the browser can understand.  
+Bable is a compiler that can convert JSX into react API calls.
+An Exapmple
+
+| JSX           | JS           |
+| ------------- |:-------------:|
+| '<div>Hello React!</div>;'    | `use strict';  
+React.createElement(
+"div",
+null,
+"Hello React!"
+);|
+
 
 ### Components  
 Compontents can be nested and can be reused. Components can be thought of like functions, where:  
