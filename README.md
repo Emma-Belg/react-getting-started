@@ -31,7 +31,9 @@ React uses the language to model the state of UIs, not the transactions on them.
 # React
 ## Some basics
 Using Node and NPM to create a React App.
-It is better to use the `npx create-react-app react-app-name`
+It is better to use the `npx create-react-app react-app-name`.  
+
+The first thing you should decide when making a React App is the component structure - you should decide how many components to use and what each component should describe (this can be quite difficult and you might need to change things as you go along, renaming or removing components).
 
 
 ### Reactive Updates  
@@ -45,7 +47,7 @@ Using jsx to create to HTML. When your web app receives just the data from the s
 
 React uses option two and therefore eleminates the need to parse an enhanced HTML template. An advantage of this is the virtual DOM (aka Tree Reconcilliation algorithm).   
 
-### Virtual DOM
+### Virtual DOM and Tree Reconciliation 
 React uses the Virtual DOM to compare versions of the UI in memory before it acts on them.  
 React uses a "smart diffing" algorithm in order to update the virtual DOM.
 
@@ -140,10 +142,7 @@ useState() can return two objects:
 Because all functions in JS can only return one thing, the useState function returns an array with the two elements needed.
 
 
-# Tree Reconciliation 
-#### Array Destructuring
 
-#### Arrow Functions
 
 
 # Extras
@@ -153,6 +152,54 @@ Note: if you need to enclose multiple elements without introducing a new div par
 **JavaScript Closures**
 **React uses function references** so it is important when you are passing functions to other components (in exports and imports) that you do not invoke the function - so only use the function name and not the name plus brackets eg Function(). This also means that if you want to pass certain parameters to a function inside of a component, that you cannot do this. The only way to do this without inducing an error is by wrapping the 'invocation' of the function inside an arrow function.
 eg. you cannot do this: `<button onClick={props.onClickFunction(props.increment)}>` but you can do this `<button onClick={() => props.onClickFunction(props.increment)}>`. The latter will work through the magic of JavaScript closers.  
+
+**Immutable = immutateable -> meaning it cannot be changed (mutated)**
+Const is NOT an immutable object - you can change it. Const just means that it has a "constant reference to it". You can still change that object just like you can do in functions that receive objects as arguments.  
+Scaler Values: scaler variables (such as strings or integers) ARE immutable and their value cannot be mutated. When you use const with a scaler value you cannot change their references either. HOWEVER, if you used cosnt with an array or object, that does not mean that the content of this array or object cannot change. It just means that the reference will constantly be pointing to this particular array or object.  
+Variables defined with const are much better than let for scaler values and function as you are guaranteed that their value did not accidentally change.
+
+## JS Notes
+### Object Literals
+The most common way to create a JS object is using an object lieral. This is basically where you just say `const obj = { key:value};` 
+
+```
+const mystery = 'answer';
+const InverseOfPI = 1 / Math.PI;
+
+const obj = {
+	p1: 10,
+  p2: 20,
+  f1() {},
+  f2: () => {},
+  [mystery]: 42,
+  InverseOfPI,
+};
+```  
+Here are some quick tests:
+Using the above code, what is the output of:  
+`console.log(obj.mystery);`   //undefined.  This is because the 'mystery' property was defined with a dynamic property syntax which means JS evaluates the expression first and whatever the expression evaluates to, will become the object's property. In this case the object evaluates to 'answer' (as you can see at the top of the code), this explains the below output.
+`console.log(obj.answer);`   //42
+`console.log(obj);`   //
+Note: the last line of code is the same as `InverseOfPI : InverseOfPI` but because the key and value are the same you can write it once. 
+
+
+### Array Destructuring
+
+### Arrow Functions
+A way to define functions without typing the keyword function. Declaring a variable as a function in the regular way: `const x = function(){};`. Declaring a variable as a function with an arrow function: `const y = () => {};`.
+Arrow functions are preferable because they behave more predictably with closures. This is because an arrow function does not care who calls it whereas a regular function does. 
+A regular function always binds the value of its "this" keyword with its caller.
+An arrow function will close over the value of the "this" keyword for its scope at the time it was defined. "The value of the "this" keyword inside an arrow function depends on WHERE the function was DEFINED (the scope that defined the function)." This makes it very useful for delayed execution cases (like event and listeners) because it gives easy access to the defining environment not the calling environment.  
+
+These are all valid (and the same) Arrow Functions:
+
+`const square1 = (a) => {
+return a * a};`  
+
+`const square1 = (a) => return a * a;`  
+Note you can only do this (remove the () around the argument) if the function recieves a single argument.
+`const square1 = a => return a * a;`  
+This syntax is usually popular for functions that get passed to array methods
 
   
 ## To Look Into
