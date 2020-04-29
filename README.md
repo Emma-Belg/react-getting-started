@@ -42,6 +42,7 @@ This change in the description of the UI has to be reflected in the device we ar
 Using jsx to create to HTML. When your web app receives just the data from the server, in the background with AJAX, you need more than HTML to work with that data. This leaves you with 2 options:  
 1. use an enhanced HTML template that has loops and condtionals  
 2. rely on the power of JS to generate the HTML from the data  
+
 React uses option two and therefore eleminates the need to parse an enhanced HTML template. An advantage of this is the virtual DOM (aka Tree Reconcilliation algorithm).   
 
 **Virtual DOM**
@@ -53,28 +54,37 @@ Bable is a compiler that can convert JSX into react API calls.
 An Exapmple
 
 
-| JS           | JSX          |
+| React API Calls  | JSX          |
 | ------------- |:-------------:|
 | `"use strict";  React.createElement("div",null, "Hello React!");`   | `<div>Hello React!</div>;`  |
 
 
-### Components  
+## Components  
 Compontents can be nested and can be reused. Components can be thought of like functions, where:  
 - the _input are things like props and state_ and 
 - _output is the description of the UI_.   
 
 Unlike functions, however, they do not need to be 'invoked' but are just used like regular html elements. Furthermore, they can have a private state - to hold any data that may change over the lifecyle of the component.  
 
-#### Component types  
-Both functional and class components can be stateful and have side effects or can be purely presentational. Both can use props and state as input objects and output jsx (Virtual DOM).
+### Component types  
+Both functional and class components can be stateful and have side effects or can be purely presentational. Both can use props and state as input objects and output jsx (Virtual DOM). 
+Component names _must_ start with capitals, otherwise they can be confused with HTML elements for example a functional component named button must be named Button as <button> is also a HTML element.
+
 **Props objects**  
-Props input is explicit - it is similar to the list of attributes an HTML element can have. The props object represents fixed values and are therefore immutable (cannot be changed).
+Props input is explicit - it is similar to the list of attributes an HTML element can have. The props object represents fixed values and are therefore immutable (cannot be changed).  
+
 **State objects**  
-The state input is internal. React uses it to auto-reflect changes in the browser. Within a component, the state object _can_ be changed.
+The state input is internal. React uses it to auto-reflect changes in the browser. Within a component, the state object _can_ be changed.  
 
 **Functional Components**  
 Functional Components are prefered because they are simpler.
 
 **Class Components**  
 Though class components are a bit more complex they can also be more powerful.
+
+### useState()
+This must be imported with `import React, {useState} from 'react';` inside of any component that uses it.
+useState() can return two objects:
+- state object (getter): this can be of any type you want it to be (string, int, array etc)
+- update function (setter)  
 
