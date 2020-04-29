@@ -1,69 +1,67 @@
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+# react-getting-started  
 
-## Available Scripts
+I am following the "React: Getting Started" course by Samer Buna on Pluralsight.
 
-In the project directory, you can run:
+##  Why use React?
+jscomplete.com/why-react
+React is technically a library (although it acts like a framewor) for building user interfaces. React is small and therefore needs to rely on other libraries for a full and robust solution.  
+"Reacti is 'declartive'", this can be interpreted as: We can 'describe a user interface' to React and it builds the actual interface for us without us having to manually build them with native web APIs and JS.
 
-### `npm start`
+What are the benefits of a library over a framework?
+Frameworks are not flexible
+Frameworks are large and full of features and that makes them hard to customise for specialised cases.
 
-Runs the app in the development mode.<br />
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+UNIX philosphy: write one thing and do it well - React follows this philosphy
 
-The page will reload if you make edits.<br />
-You will also see any lint errors in the console.
+React uses the language to model the state of UIs, not the transactions on them.
 
-### `npm test`
+**Positives of React**
 
-Launches the test runner in the interactive watch mode.<br />
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+- Virtual DOM is much easier to work with than DOM API  
+- the learning curve is low for those who already know JS  
+- Learning React Native pays of for IOS and Android mobile applications - you can even share some logic between mobile and web applications
+- React team at Facebook tests all new features which increases the trust in the library - it is rare to see big bugs in the library
+- React established a new language between developers and browsers that allowed developers to declairatively describe 'stateful user interfaces' - this means instead of coming up with steps for the transactions on their interfaces devs just describe the interfaces in terms of a final state, like a function. When transations happen to that state React takes care of updating the user interfaces based on that 
 
-### `npm run build`
 
-Builds the app for production to the `build` folder.<br />
-It correctly bundles React in production mode and optimizes the build for the best performance.
+# React
+## Some basics
+Using Node and NPM to create a React App.
+It is better to use the `npx create-react-app react-app-name
 
-The build is minified and the filenames include the hashes.<br />
-Your app is ready to be deployed!
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+### Reactive Updates  
+When the state of a React component (the input) changes, the user interface it represents (the output), also changes.
+This change in the description of the UI has to be reflected in the device we are working with - normaly through the DOM tree. But with react we dont worry about how or when to managed these changes - React will react to the changes in a components state and automatically update the parts of the DOM that need updating.  
 
-### `npm run eject`
+### Virtual Views in Memory  
+Using jsx to create to HTML. When your web app receives just the data from the server, in the background with AJAX, you need more than HTML to work with that data. This leaves you with 2 options
+1. use an enhanced HTML template that has loops and condtionals 
+2. rely on the power of JS to generate the HTML from the data
+React uses option two and therefore eleminates the need to parse an enhanced HTML template. An advantage of this is the virtual DOM (aka Tree Reconcilliation algorithm).  
+**Virtual DOM**
+React uses the Virtual DOM to compare versions of the UI in memory before it acts on them.
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+**JSX**
+JSX is complied to the pure JS calls that create the HTML output.
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+### Components  
+Compontents can be nested and can be reused. Components can be thought of like functions, where:  
+- the _input are things like props and state_ and 
+- _output is the description of the UI_.   
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+Unlike functions, however, they do not need to be 'invoked' but are just used like regular html elements. Furthermore, they can have a private state - to hold any data that may change over the lifecyle of the component.  
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+#### Component types  
+Both functional and class components can be stateful and have side effects or can be purely presentational. Both can use props and state as input objects and output jsx (Virtual DOM).
+**Props objects**  
+Props input is explicit - it is similar to the list of attributes an HTML element can have. The props object represents fixed values and are therefore immutable (cannot be changed).
+**State objects**  
+The state input is internal. React uses it to auto-reflect changes in the browser. Within a component, the state object _can_ be changed.
 
-## Learn More
+**Functional Components**  
+Functional Components are prefered because they are simpler.
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+**Class Components**  
+Though class components are a bit more complex they can also be more powerful.
 
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/code-splitting
-
-### Analyzing the Bundle Size
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size
-
-### Making a Progressive Web App
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app
-
-### Advanced Configuration
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/advanced-configuration
-
-### Deployment
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/deployment
-
-### `npm run build` fails to minify
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify
-# react-getting-started
