@@ -4,6 +4,8 @@ I am following the "React: Getting Started" course by Samer Buna on Pluralsight.
 
 Instal the React Developer Tools extension.
 
+Play around with code from this tutorial here: https://jscomplete.com/playground/rgs1.1
+
 jsdrops.com/rgs1.1
 
 ##  Why use React?
@@ -131,6 +133,17 @@ function Display(props) {
 }
 ```
 
+### Props and Data
+You can make a component receive data through its props. To do this you need to take the object that holds the data and 'spread' it inside the element using the _spread operator_ eg `<Element {...testData[0]} />`. When you use the spread operator with a data object (for example from an API) in a React component, all the properties of that object will become props for this component. Note then, that you can only do this with Functional Components and not Class Components. 
+
+eg. This will spread _all_ of the data of the object across 3 cards:
+```
+<Card {...testData[0]} />
+<Card {...testData[1]} />
+<Card {...testData[2]} />
+```
+
+
 
 ## State object
 State in a React component can only be accesed by that component itself and no other components. To make state accessable between components, you need to put the state inside of a parent component that the other required components are children to. You then need to 'flow' the values of the state from the parent to the children - this can be done using the props object. This is known as 'the one way flow of data' (parent to child). Parent components can also flow behaviour down to children.  
@@ -149,7 +162,7 @@ Because all functions in JS can only return one thing, the useState function ret
 
 # Class Components  
 
-In class components, instead of recieving props as arguments, both the props and the state are managed on an instance of the class. (This is just like normal OOP, you make a class and then have to instantiate it - each instance(object) of a class gets 'props and state').
+In class components, instead of recieving props as arguments, both the props and the state are managed on an instance of the class. (This is just like normal OOP, you make a class and then have to instantiate it - each instance(object) of a class gets 'props and state'). In React an instance is internally created every time we use a component (like <ComponentName />).
 
 
 
@@ -241,3 +254,5 @@ This syntax is usually popular for functions that get passed to array methods
 ## To Look Into
 - JS closures -> why a function needs to be wrapped with an arrow function in order to work
 - imperativ vs declarative programing (React is declarative and uses the virtual DOM, in order to get pure HTML to update only one element in a similar way, you need to write imperative logic),
+- spread operator  `{...testData[0]}`  
+
