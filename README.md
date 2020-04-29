@@ -55,14 +55,7 @@ An Exapmple
 
 | JS           | JSX          |
 | ------------- |:-------------:|
-| ```
-"use strict";  
-React.createElement(
-"div",
-null,
-"Hello React!"
-);
-```   | `<div>Hello React!</div>;`  |
+| `"use strict";  React.createElement("div",null, "Hello React!");`   | `<div>Hello React!</div>;`  |
 
 
 ### Components  
