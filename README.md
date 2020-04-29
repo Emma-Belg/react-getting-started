@@ -23,15 +23,15 @@ React uses the language to model the state of UIs, not the transactions on them.
 
 - Virtual DOM is much easier to work with than DOM API  
 - the learning curve is low for those who already know JS  
-- Learning React Native pays of for IOS and Android mobile applications - you can even share some logic between mobile and web applications
-- React team at Facebook tests all new features which increases the trust in the library - it is rare to see big bugs in the library
-- React established a new language between developers and browsers that allowed developers to declairatively describe 'stateful user interfaces' - this means instead of coming up with steps for the transactions on their interfaces devs just describe the interfaces in terms of a final state, like a function. When transations happen to that state React takes care of updating the user interfaces based on that 
+- Learning React Native pays of for IOS and Android mobile applications - you can even share some logic between mobile and web applications  
+- React team at Facebook tests all new features which increases the trust in the library - it is rare to see big bugs in the library  
+- React established a new language between developers and browsers that allowed developers to declairatively describe 'stateful user interfaces' - this means instead of coming up with steps for the transactions on their interfaces devs just describe the interfaces in terms of a final state, like a function. When transations happen to that state React takes care of updating the user interfaces based on that  
 
 
 # React
 ## Some basics
 Using Node and NPM to create a React App.
-It is better to use the `npx create-react-app react-app-name
+It is better to use the `npx create-react-app react-app-name`
 
 
 ### Reactive Updates  
@@ -39,26 +39,30 @@ When the state of a React component (the input) changes, the user interface it r
 This change in the description of the UI has to be reflected in the device we are working with - normaly through the DOM tree. But with react we dont worry about how or when to managed these changes - React will react to the changes in a components state and automatically update the parts of the DOM that need updating.  
 
 ### Virtual Views in Memory  
-Using jsx to create to HTML. When your web app receives just the data from the server, in the background with AJAX, you need more than HTML to work with that data. This leaves you with 2 options
-1. use an enhanced HTML template that has loops and condtionals 
-2. rely on the power of JS to generate the HTML from the data
-React uses option two and therefore eleminates the need to parse an enhanced HTML template. An advantage of this is the virtual DOM (aka Tree Reconcilliation algorithm).  
+Using jsx to create to HTML. When your web app receives just the data from the server, in the background with AJAX, you need more than HTML to work with that data. This leaves you with 2 options:  
+1. use an enhanced HTML template that has loops and condtionals  
+2. rely on the power of JS to generate the HTML from the data  
+React uses option two and therefore eleminates the need to parse an enhanced HTML template. An advantage of this is the virtual DOM (aka Tree Reconcilliation algorithm).   
+
 **Virtual DOM**
-React uses the Virtual DOM to compare versions of the UI in memory before it acts on them.
+React uses the Virtual DOM to compare versions of the UI in memory before it acts on them.  
 
 **JSX**
 JSX is complied to the pure JS calls that create the HTML output. JSX is not executed by the browser, it is executed by the JSX extension and compiled to something the browser can understand.  
 Bable is a compiler that can convert JSX into react API calls.
 An Exapmple
 
-| JSX           | JS           |
+
+| JS           | JSX          |
 | ------------- |:-------------:|
-| '<div>Hello React!</div>;'    | `use strict';  
+| ```
+"use strict";  
 React.createElement(
 "div",
 null,
 "Hello React!"
-);|
+);
+```   | `<div>Hello React!</div>;`  |
 
 
 ### Components  
