@@ -1,7 +1,7 @@
 import React, {useState} from 'react';
-import logo from './logo.svg';
 import './App.css';
 import {Hello, Button, Display} from './jscomplete-playground.js';
+import GithubCardsApp from "./GithubCardsApp";
 
 function App() {
     //const [currentStateValue, functionToSetNewStateValue] = useState(initialStateValue);
@@ -18,6 +18,9 @@ function App() {
                 <Button onClickFunction = {incrementCounter} increment = {13}/>
                 <Display message ={counter} />
             </header>
+            <div>
+                <GithubCardsApp />
+            </div>
 
         </div>
     );

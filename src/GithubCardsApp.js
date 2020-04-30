@@ -1,41 +1,37 @@
-import React, {useState} from 'react';
-import './App.css';
+import React from 'react';
+import './GithubCardsApp.css';
+import Card, {GitList} from "./Card.js";
+import Form from "./Form";
 
-function Hello() {
-    return <div>Hello React!</div>;
-}
 
-function Button(props) {
+class GithubCardsApp extends React.Component {
+/*    constructor(props) {
+        //this super method is needed to honour the link between the App class and the class that it extends from (React.Component)
+        super(props);
+        this.state = {
+            profiles: testData,
+        };
+    }*/
+    //the below is the same as the above constructor
+    state = { profiles:[], };
 
-    const handleClick = () => props.onClickFunction(props.increment);
-    return (
-        //this prop references the tag inside the Button function element in App.js
-        //the onClickFunction property allows the button to invoke the incrementCounter function found in App.js
-        //This is because the value of onClickFunction is incrementCounter which is the function inside of the App Component
-        <button onClick={handleClick}>
-            +{props.increment}
-        </button>
-    );
-}
+    addNewProfile = (profileData) => {
+        this.setState(prevState => ({
+            //this is the spread operator syntax and is equiv to doing a concat operation
+            profiles: [...prevState.profiles, profileData],
+            })
+        );
+    };
 
-function Display(props) {
-    const render = () => {
-        (new Date).toLocaleTimeString()
+    render() {
+        return (
+            <div>
+                <div className="GithubCardsApp">{this.props.title}</div>
+                    <Form onSubmit={this.addNewProfile}/>
+                    <GitList profiles={this.state.profiles}/>
+            </div>
+            )
     }
-    setInterval(render, 1000);
-    return(
-        <div>
-            {/*this references the tag inside the Display function element in App.js*/}
-            The sum is: {props.message}
-            <br />
-            <input />
-            <br />
-            <pre>{() => setInterval((new Date).toLocaleTimeString(), 1000)}</pre>
-        </div>
-    )
 }
 
-
-export {Hello};
-export {Button};
-export {Display};
+export default GithubCardsApp;
