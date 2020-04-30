@@ -49,19 +49,19 @@ Using jsx to create to HTML. When your web app receives just the data from the s
 
 React uses option two and therefore eleminates the need to parse an enhanced HTML template. An advantage of this is the virtual DOM (aka Tree Reconcilliation algorithm).   
 
-### Virtual DOM and Tree Reconciliation 
+### Virtual DOM and Tree Reconciliation  
 React uses the Virtual DOM to compare versions of the UI in memory before it acts on them.  
-React uses a "smart diffing" algorithm in order to update the virtual DOM.
+React uses a "smart diffing" algorithm in order to update the virtual DOM.  
 
 **My simple metaphor for the Virtual DOM (VD)...**  
-Remember those 'spot the difference' pictures from when you were a kid? Think of the UI as one of these pictures and as a change in state as one of the 'differences' that needs to be spotted.
-**In the pure HTML way**: every change in state means that the entire picture needs to be "drawn" again from scratch.
-**In the React Virtual DOM way**: the VD can quickly "spot the difference" between the previous state and the updated state and instead of drawing the entire picture again from scratch, it will _only update the elements that are needed_. This is possible because we have a representation of the UI in memory because it was written in JS - the VD compares previous state to current state and updates what is needed.
+Remember those 'spot the difference' pictures from when you were a kid? Think of the UI as one of these pictures and as a change in state as one of the 'differences' that needs to be spotted.  
+**In the pure HTML way**: every change in state means that the entire picture needs to be "drawn" again from scratch.  
+**In the React Virtual DOM way**: the VD can quickly "spot the difference" between the previous state and the updated state and instead of drawing the entire picture again from scratch, it will _only update the elements that are needed_. This is possible because we have a representation of the UI in memory because it was written in JS - the VD compares previous state to current state and updates what is needed.  
 
 _**Why should I care?**_
-Imagine you have a website with a counter that counts down (in seconds) until something is put on sale and it also has an input field where you can pre-order. With the pure HTML way, you will never be able to use this input field because the second you type something into it - it will be entirely refreshed as the entrie page needs to rerender for the counter to continue (there are ways around this with imperative coding). Whereas this would never be a problem with a React App thanks to the VD.
+Imagine you have a website with a counter that counts down (in seconds) until something is put on sale and it also has an input field where you can pre-order. With the pure HTML way, you will never be able to use this input field because the second you type something into it - it will be entirely refreshed as the entrie page needs to rerender for the counter to continue (there are ways around this with imperative coding). Whereas this would never be a problem with a React App thanks to the VD.  
 
-**JSX**
+**JSX**  
 JSX is complied to the pure JS calls that create the HTML output. JSX (like twig) supports dynamic expressions (functions placed into {}). JSX is not executed by the browser, it is executed by the JSX extension and compiled to something the browser can understand.  
 Bable is a compiler that can convert JSX into react API calls.
 An Exapmple:
@@ -81,9 +81,10 @@ Unlike functions, however, they do not need to be 'invoked' but are just used li
 React components have a one way flow of data and a component can't change the state of its parent. To pass data between components you need to use props.  
   
   
-_**To pass data from a child to a parent**
+## To pass data from a child to a parent  
 The parent component can pass properties to it's child component. Those component properties can be simple primative values OR **function references**. If the parent component passes a function reference to the child component, we can change the state of the parent component _inside_ that function and the form component will be able to invoke that function because it will be part of its props object.
-  
+
+How to use axios with React - [follow this video](https://www.youtube.com/watch?v=oQnojIyTXb8) . First `npm install axios`.  
   
 
 ### Component types  
