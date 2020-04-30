@@ -78,9 +78,20 @@ Compontents can be nested and can be reused. Components can be thought of like f
 
 Unlike functions, however, they do not need to be 'invoked' but are just used like regular html elements. Furthermore, they can have a private state - to hold any data that may change over the lifecyle of the component.  
 
+React components have a one way flow of data and a component can't change the state of its parent. To pass data between components you need to use props.  
+  
+  
+_**To pass data from a child to a parent**
+The parent component can pass properties to it's child component. Those component properties can be simple primative values OR **function references**. If the parent component passes a function reference to the child component, we can change the state of the parent component _inside_ that function and the form component will be able to invoke that function because it will be part of its props object.
+  
+  
+
 ### Component types  
 Both functional and class components can be stateful and have side effects or can be purely presentational. Both can use props and state as input objects and output jsx (Virtual DOM). 
-Component names _must_ start with capitals, otherwise they can be confused with HTML elements for example a functional component named button must be named Button as <button> is also a HTML element.
+Component names _must_ start with capitals, otherwise they can be confused with HTML elements for example a functional component named button must be named Button as <button> is also a HTML element.  
+	
+**Constants**
+You can also render const variables directly into the view just like a functional or class component.
 
 **Props objects**  
 Props input is explicit - it is similar to the list of attributes an HTML element can have. The props object represents fixed values and are therefore immutable (cannot be changed).  
@@ -162,7 +173,83 @@ Because all functions in JS can only return one thing, the useState function ret
 
 # Class Components  
 
-In class components, instead of recieving props as arguments, both the props and the state are managed on an instance of the class. (This is just like normal OOP, you make a class and then have to instantiate it - each instance(object) of a class gets 'props and state'). In React an instance is internally created every time we use a component (like <ComponentName />).
+In class components, instead of recieving props as arguments, both the props and the state are managed on an instance of the class. (This is just like normal OOP, you make a class and then have to instantiate it - each instance(object) of a class gets 'props and state'). In React an instance is internally created every time we use a component (like rendering <ComponentName />).
+
+Note: Instead of using a constructor (such as the example below), you can simply used a class field like this:  
+`state ={ profiles:[] };`   
+be careful(!), the above example is not yet part of the official JS language but it is expected to be at some stage. 
+The above "class field" syntax has some power when combined with arrow functions.
+
+
+## Class Constructors
+An example of a class constructor:
+```
+    constructor(props) {
+        super(props);
+        this.state = {
+	profiles:[]
+	};
+    }
+```  
+
+To read this new state element, when a component (in the jsx form) needs it, you can "flow it down" with code like this:
+`<Card profiles={this.state.profiles}/>`   
+Here, `state` is an object on the instance of the Card component (in jsx form) and
+`profiles` array is a property on that object.
+
+### The Super method  
+The super method is needed to honour the link between the App class and the class that it extends from (React.Component). 
+
+### this.State
+Unlike with "useState" in functional components, which can take anything (eg string or int), class components use "this.State" and this.State instance property _must_ be an object.
+
+## Changing state with a class component
+Changing state with class components is different to functional components and a little bit harder than using hooks.  
+They are different to hooks in that the function is always named setState, it will always receive an object and it will merge the object with the current state.  `onChange={event => this.setState({ userName: event.target.value })}`  
+
+Here is an example of capturing the 'changing state' of the input of a form when a user types into it. 
+
+```
+state = { userName: ''};
+    handleSubmit = (event) => { event.preventDefault();}
+
+    render() {
+        return(
+            <form onSubmit={this.handleSubmit}>
+                <input
+                    type="text"
+                    //if you just have this without the below onChange, then no one would be able to type into the form b/c React is 'controlling' value of the input
+                    value={this.state.userName}
+                    //the onChange event lets the DOM tell React that something has changed
+                    onChange={event => this.setState(
+                        //to grab the value of the input you use event.target.value
+                        { userName: event.target.value }
+                        )}
+                />
+```
+
+# Events and Refs
+Every single React event function recieves an event argument. For React events the "class field" syntax you see below is just a wrapper around the native js event - all events available in native JS are available here.
+
+To take user input you need to define an event handler using the "class field" syntax - you then pass this to the `onSubmit` using the 'this' keyword.  eg:
+```
+handleSubmit = (event) => {
+	//preventDefault is important here as it stops the normal HTML behaviour of the page refreshing on submit
+        event.preventDefault();
+    }
+```
+    
+By using `onSubmit={this.handleSubmit}` on the form, you can utilise native form submision features - like making a form 'required' by adding this to the input field.
+
+## Forms and Refs
+You have options to get info from a form.  
+You can get the input value by reading it **from the DOM element**.To get input from a form in this way, you need to use a reference. To do this you need to do two things:
+1. add `ref = {this.refName}` into the input field. 
+2. add instansiate a ref **object** using `refName = React.createRef();`
+
+Alternatively you can use Controlled Components to control the input values directly though React itself.eg. the above  `onChange={event => this.setState({ userName: event.target.value })}`  example.  
+The advantage of this method is that it notes every letter the user types as they type, this can be useful when you need to provide feedback as the user is typing.
+
 
 
 
@@ -255,4 +342,5 @@ This syntax is usually popular for functions that get passed to array methods
 - JS closures -> why a function needs to be wrapped with an arrow function in order to work
 - imperativ vs declarative programing (React is declarative and uses the virtual DOM, in order to get pure HTML to update only one element in a similar way, you need to write imperative logic),
 - spread operator  `{...testData[0]}`  
-
+- how to pass props from class component to function component
+- objects vs instances in React
