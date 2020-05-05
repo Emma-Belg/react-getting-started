@@ -106,6 +106,7 @@ Functional Components are prefered because they are simpler.
 **Class Components**  
 Though class components are a bit more complex they can also be more powerful.  
   
+  
 
 # React Functional Components  
 Important to know for React functional components: State, props and hooks.  
